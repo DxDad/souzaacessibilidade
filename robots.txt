@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://souzaacessibilidade.com.br/sitemap.xml
