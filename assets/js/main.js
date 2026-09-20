@@ -25,7 +25,7 @@
   }
 
   function applyTextSize(size, announce = false) {
-    const normalized = textSizes.includes(size) ? size : 18;
+    const normalized = textSizes.includes(size) ? size : 16;
     root.style.setProperty('--text-size', `${normalized}px`);
     root.dataset.textSize = String(normalized);
     storage.set('souza_text_size', String(normalized));
@@ -35,7 +35,7 @@
   }
 
   applyTheme(root.dataset.theme, false);
-  applyTextSize(Number(root.dataset.textSize || storage.get('souza_text_size') || 18));
+  applyTextSize(Number(root.dataset.textSize || storage.get('souza_text_size') || 16));
 
   themeButton?.addEventListener('click', () => {
     applyTheme(root.dataset.theme === 'dark' ? 'light' : 'dark');
