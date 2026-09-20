@@ -7,9 +7,9 @@
 <meta name="description" content="Site de Danilo Souza sobre acessibilidade digital, comunicação inclusiva, educação, tecnologias assistivas, AccessOps Framework, publicações e projetos.">
 <link rel="canonical" href="https://souzaacessibilidade.com.br/">
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<script data-visual-init>(function(){try{var t=localStorage.getItem('souza_theme');document.documentElement.dataset.theme=t==='light'?'light':'dark';var s=Number(localStorage.getItem('souza_text_size'));if([14,16,18,20,22].includes(s)){document.documentElement.style.setProperty('--text-size',s+'px');document.documentElement.dataset.textSize=String(s);}}catch(e){document.documentElement.dataset.theme='dark';}})();</script>
 <link rel="stylesheet" href="assets/css/styles.css">
-<meta name="theme-color" content="#f4efe5" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#171b18" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" id="theme-color-meta" content="#171b18">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="pt_BR">
 <meta property="og:title" content="Danilo Souza | Acessibilidade digital e comunicação inclusiva">
@@ -18,26 +18,79 @@
 <meta property="og:image" content="https://souzaacessibilidade.com.br/assets/img/danilo-souza-home.webp">
 <meta name="twitter:card" content="summary_large_image">
 
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Person", "name": "Danilo Souza", "url": "https://souzaacessibilidade.com.br/", "image": "https://souzaacessibilidade.com.br/assets/img/danilo-souza-home.webp", "jobTitle": "Diretor de Acessibilidade Digital e Comunicação Inclusiva", "sameAs": ["https://www.linkedin.com/in/danilo-s-souza/", "http://lattes.cnpq.br/0973728129775438", "https://github.com/DxDad/souzaacessibilidade", "https://www.credly.com/badges/1b56a520-1020-4061-b99e-960985c0852b/linked_in_profile"], "knowsAbout": ["Acessibilidade digital", "Comunicação inclusiva", "Tecnologias assistivas", "Governança digital", "Educação inclusiva"]}</script>
+<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://souzaacessibilidade.com.br/#website",
+      "url": "https://souzaacessibilidade.com.br/",
+      "name": "Souza Acessibilidade",
+      "inLanguage": "pt-BR",
+      "publisher": {"@id": "https://souzaacessibilidade.com.br/#danilo-souza"}
+    },
+    {
+      "@type": "Person",
+      "@id": "https://souzaacessibilidade.com.br/#danilo-souza",
+      "name": "Danilo Souza",
+      "alternateName": "Danilo Silva de Souza",
+      "url": "https://souzaacessibilidade.com.br/",
+      "image": "https://souzaacessibilidade.com.br/assets/img/danilo-souza-home.webp",
+      "jobTitle": "Diretor de Acessibilidade Digital e Comunicação Inclusiva",
+      "sameAs": [
+        "https://www.linkedin.com/in/danilo-s-souza/",
+        "http://lattes.cnpq.br/0973728129775438",
+        "https://github.com/DxDad/souzaacessibilidade",
+        "https://www.credly.com/badges/1b56a520-1020-4061-b99e-960985c0852b/linked_in_profile"
+      ],
+      "knowsAbout": ["Acessibilidade digital", "Comunicação inclusiva", "Tecnologias assistivas", "Governança digital", "Educação inclusiva"]
+    }
+  ]
+}</script>
 </head>
 <body>
-<a class="skip-link" href="#conteudo">Ir para o conteúdo</a>
+<div class="utility-bar">
+  <div class="shell utility-inner">
+    <a class="skip-link" href="#conteudo">Ir para o conteúdo</a>
+    <div class="display-controls" role="group" aria-label="Preferências de visualização">
+      <button type="button" class="utility-button" data-theme-toggle>Modo claro</button>
+      <button type="button" class="utility-button font-button" data-font-decrease>A−<span class="sr-only"> Diminuir tamanho do texto</span></button>
+      <button type="button" class="utility-button font-button" data-font-increase>A+<span class="sr-only"> Aumentar tamanho do texto</span></button>
+      <span class="sr-only" id="text-size-status" aria-live="polite"></span>
+    </div>
+  </div>
+</div>
+<div class="consent" id="analytics-consent" hidden role="dialog" aria-modal="true" aria-labelledby="consent-title" aria-describedby="consent-text">
+  <div class="consent-inner">
+    <div class="consent-copy">
+      <p id="consent-title"><strong>Privacidade e dados de uso</strong></p>
+      <p id="consent-text">Coletamos dados de uso para compreender e melhorar a experiência no site. Você autoriza essa coleta? Consulte a <a href="politica-de-privacidade.html">Política de Privacidade</a>.</p>
+    </div>
+    <div class="consent-actions">
+      <button type="button" class="button" data-consent="granted">Aceitar</button>
+      <button type="button" class="button secondary inverse" data-consent="denied">Recusar</button>
+      <button type="button" class="button secondary inverse consent-close" data-consent-close>Fechar</button>
+    </div>
+  </div>
+</div>
 <header class="site-header">
   <div class="shell header-inner">
-    <a class="brand" href="index.html" aria-label="Danilo Souza — página inicial">
+    <a class="brand" href="index.html">
       <span class="brand-mark" aria-hidden="true"></span>
       <span class="brand-text"><strong>Danilo Souza</strong><span>Souza Acessibilidade</span></span>
+      <span class="sr-only"> — página inicial</span>
     </a>
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-menu"><span aria-hidden="true">☰</span><span class="sr-only">Abrir menu</span></button>
     <nav id="site-menu" class="site-nav" aria-label="Navegação principal">
       <ul>
         <li><a href="index.html" aria-current="page">Início</a></li>
         <li><a href="quem-sou.html">Quem sou</a></li>
-        <li><a href="entre-a-leitura-e-a-permanencia.html">Livro</a></li>
+        <li><a href="entre-a-leitura-e-a-permanencia.html">Livros publicados</a></li>
         <li><a href="accessops-framework.html">AccessOps Framework</a></li>
+        <li><a href="formacoes.html">Formações personalizadas</a></li>
         <li class="nav-submenu">
           <button class="submenu-toggle" type="button" aria-expanded="false" aria-controls="atuacao-menu">Atuação e publicações <span aria-hidden="true">▾</span></button>
-          <ul id="atuacao-menu" class="submenu" hidden><li><a href="cursos.html">Cursos</a></li><li><a href="ferramentas-e-recursos.html">Ferramentas e recursos</a></li><li><a href="projetos.html">Projetos</a></li><li><a href="publicacoes.html">Publicações</a></li><li><a href="atuacao-voluntaria.html">Atuação voluntária</a></li></ul>
+          <ul id="atuacao-menu" class="submenu" hidden><li><a href="projetos.html">Projetos em destaque</a></li><li><a href="publicacoes.html">Publicações</a></li><li><a href="atuacao-voluntaria.html">Atuação voluntária</a></li><li><a href="cursos.html">Cursos</a></li><li><a href="ferramentas-e-recursos.html">Ferramentas e recursos</a></li></ul>
         </li>
         <li><a href="contato.html">Contato</a></li>
       </ul>
@@ -51,7 +104,7 @@
       <p class="eyebrow">Tecnologia, acesso e participação</p>
       <h1 id="home-title">Danilo Souza</h1>
       <p class="tagline">Acessibilidade digital, comunicação inclusiva, educação e tecnologias assistivas.</p>
-      <div class="prose lede"><p>Minha atuação combina liderança técnica, gestão, avaliação de acessibilidade, formação e desenvolvimento de processos para tornar serviços, conteúdos e experiências digitais mais inclusivos.</p><p>Cheguei à acessibilidade antes pela experiência cotidiana com tecnologia e deficiência visual; depois vieram a pesquisa, a operação de projetos em escala e a gestão pública.</p></div>
+      <div class="prose lede"><p class="editorial-initial">Minha atuação combina liderança técnica, gestão, avaliação de acessibilidade, formação e desenvolvimento de processos para tornar serviços, conteúdos e experiências digitais mais inclusivos.</p><p>Cheguei à acessibilidade antes pela experiência cotidiana com tecnologia e deficiência visual; depois vieram a pesquisa, a operação de projetos em escala e a gestão pública.</p></div>
       <p class="text-link"><a href="quem-sou.html">Conheça minha trajetória</a></p>
     </div>
     <figure class="home-photo-wrap"><img class="home-photo" src="assets/img/danilo-souza-home.webp" width="1800" height="1199" alt="Danilo Souza sentado à mesa diante de um notebook, em uma sala com painéis de madeira."></figure>
@@ -68,14 +121,14 @@
 </section>
 <section class="section" aria-labelledby="iaap-title">
   <div class="shell credential-strip">
-    <img src="assets/img/iaap-professional-member.webp" width="600" height="600" alt="Badge IAAP Professional Member.">
+    <img src="assets/img/iaap-professional-member.png" width="500" height="500" alt="Badge IAAP Professional Member.">
     <div class="prose"><p class="eyebrow">Credencial profissional</p><h2 id="iaap-title">Professional Member da IAAP</h2><p>Integro a International Association of Accessibility Professionals como Professional Member.</p><p><a href="https://www.credly.com/badges/1b56a520-1020-4061-b99e-960985c0852b/linked_in_profile" target="_blank" rel="noopener noreferrer">Verificar credencial na Credly<span class="sr-only"> (abre em nova aba)</span></a></p></div>
   </div>
 </section>
 <section class="section alt" aria-labelledby="caminhos-title">
   <div class="shell"><div class="section-head compact"><div><p class="eyebrow">Explore</p><h2 id="caminhos-title">Outros caminhos</h2></div></div>
     <div class="editorial-links">
-      <a class="editorial-link" href="projetos.html"><span class="editorial-index">01</span><span class="editorial-title">Projetos</span><span class="editorial-desc">Experiências selecionadas em acessibilidade, comunicação, educação e serviços digitais.</span></a>
+      <a class="editorial-link" href="projetos.html"><span class="editorial-index">01</span><span class="editorial-title">Projetos em destaque</span><span class="editorial-desc">Experiências selecionadas em acessibilidade, comunicação, educação e serviços digitais.</span></a>
       <a class="editorial-link" href="cursos.html"><span class="editorial-index">02</span><span class="editorial-title">Cursos e formações</span><span class="editorial-desc">Conteúdos próprios, formações personalizadas e uma curadoria de recursos para aprender.</span></a>
       <a class="editorial-link" href="ferramentas-e-recursos.html"><span class="editorial-index">03</span><span class="editorial-title">Ferramentas e recursos</span><span class="editorial-desc">Tecnologias assistivas, ferramentas de avaliação e referências técnicas reunidas em um só lugar.</span></a>
       <a class="editorial-link" href="publicacoes.html"><span class="editorial-index">04</span><span class="editorial-title">Publicações</span><span class="editorial-desc">Produção acadêmica e técnica relacionada a acessibilidade, educação e tecnologia.</span></a>
@@ -87,11 +140,11 @@
     <div>
       <p class="footer-brand">Danilo Souza</p>
       <p>Acessibilidade digital, comunicação inclusiva, educação e tecnologias assistivas.</p>
-      <div class="footer-social" aria-label="Perfis e canais externos">
+      <nav class="footer-social" aria-label="Perfis e canais externos">
         <a href="https://www.linkedin.com/in/danilo-s-souza/" target="_blank" rel="noopener noreferrer">LinkedIn<span class="sr-only"> (abre em nova aba)</span></a>
         <a href="http://lattes.cnpq.br/0973728129775438" target="_blank" rel="noopener noreferrer">Lattes<span class="sr-only"> (abre em nova aba)</span></a>
         <a href="https://www.youtube.com/playlist?list=PL_rMi_LH7fsJri7m0arTn__mu0YzsAhyv" target="_blank" rel="noopener noreferrer">YouTube<span class="sr-only"> (abre em nova aba)</span></a>
-      </div>
+      </nav>
     </div>
     <nav aria-label="Informações do site" class="footer-links">
       <a href="mapa-do-site.html">Mapa do site</a>
@@ -104,23 +157,7 @@
     <a class="github-hosting" href="https://github.com/DxDad/souzaacessibilidade" target="_blank" rel="noopener noreferrer"><span class="github-mark" aria-hidden="true"></span>Este site está hospedado via GitHub Pages.<span class="sr-only"> Repositório do site, abre em nova aba.</span></a>
   </div>
 </footer>
-<div class="consent" id="analytics-consent" hidden role="dialog" aria-modal="true" aria-labelledby="consent-title" aria-describedby="consent-text">
-  <div class="consent-inner">
-    <div>
-      <p id="consent-title"><strong>Privacidade e estatísticas</strong></p>
-      <p id="consent-text">O site usa medição sem cookies por padrão. Com sua autorização, o Google Analytics pode usar armazenamento para produzir métricas mais completas.</p>
-    </div>
-    <div class="consent-actions">
-      <button type="button" class="button" data-consent="granted">Aceitar</button>
-      <button type="button" class="button secondary inverse" data-consent="denied">Recusar</button>
-      <a class="consent-policy" href="politica-de-privacidade.html">Política de privacidade</a>
-      <button type="button" class="consent-close" data-consent-close aria-label="Fechar e manter a medição sem cookies">×</button>
-    </div>
-  </div>
-</div>
 <script src="assets/js/main.js" defer></script>
-<div vw class="enabled"><div vw-access-button class="active"></div><div vw-plugin-wrapper><div class="vw-plugin-top-wrapper"></div></div></div>
-<script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
-<script>if(window.VLibras){new window.VLibras.Widget('https://vlibras.gov.br/app');}</script>
+<script src="https://vlibras.gov.br/app/vlibras-plugin.js" defer></script>
 </body>
 </html>

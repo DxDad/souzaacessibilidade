@@ -7,9 +7,9 @@
 <meta name="description" content="AccessOps Framework: metodologia autoral para sustentar acessibilidade digital de forma contínua por meio de governança, avaliação, monitoramento e melhoria.">
 <link rel="canonical" href="https://souzaacessibilidade.com.br/accessops-framework.html">
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<script data-visual-init>(function(){try{var t=localStorage.getItem('souza_theme');document.documentElement.dataset.theme=t==='light'?'light':'dark';var s=Number(localStorage.getItem('souza_text_size'));if([14,16,18,20,22].includes(s)){document.documentElement.style.setProperty('--text-size',s+'px');document.documentElement.dataset.textSize=String(s);}}catch(e){document.documentElement.dataset.theme='dark';}})();</script>
 <link rel="stylesheet" href="assets/css/styles.css">
-<meta name="theme-color" content="#f4efe5" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#171b18" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" id="theme-color-meta" content="#171b18">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="pt_BR">
 <meta property="og:title" content="AccessOps Framework | Danilo Souza">
@@ -18,26 +18,65 @@
 <meta property="og:image" content="https://souzaacessibilidade.com.br/assets/img/danilo-souza-home.webp">
 <meta name="twitter:card" content="summary_large_image">
 
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "@id": "https://souzaacessibilidade.com.br/accessops-framework.html#framework",
+  "name": "AccessOps Framework",
+  "url": "https://souzaacessibilidade.com.br/accessops-framework.html",
+  "description": "Metodologia autoral para sustentar acessibilidade digital de forma contínua por meio de governança, avaliação, monitoramento e melhoria.",
+  "creator": {"@id": "https://souzaacessibilidade.com.br/#danilo-souza"},
+  "isPartOf": {"@id": "https://souzaacessibilidade.com.br/#website"},
+  "license": "https://creativecommons.org/licenses/by-nc/4.0/"
+}
+</script>
+
 
 </head>
 <body>
-<a class="skip-link" href="#conteudo">Ir para o conteúdo</a>
+<div class="utility-bar">
+  <div class="shell utility-inner">
+    <a class="skip-link" href="#conteudo">Ir para o conteúdo</a>
+    <div class="display-controls" role="group" aria-label="Preferências de visualização">
+      <button type="button" class="utility-button" data-theme-toggle>Modo claro</button>
+      <button type="button" class="utility-button font-button" data-font-decrease>A−<span class="sr-only"> Diminuir tamanho do texto</span></button>
+      <button type="button" class="utility-button font-button" data-font-increase>A+<span class="sr-only"> Aumentar tamanho do texto</span></button>
+      <span class="sr-only" id="text-size-status" aria-live="polite"></span>
+    </div>
+  </div>
+</div>
+<div class="consent" id="analytics-consent" hidden role="dialog" aria-modal="true" aria-labelledby="consent-title" aria-describedby="consent-text">
+  <div class="consent-inner">
+    <div class="consent-copy">
+      <p id="consent-title"><strong>Privacidade e dados de uso</strong></p>
+      <p id="consent-text">Coletamos dados de uso para compreender e melhorar a experiência no site. Você autoriza essa coleta? Consulte a <a href="politica-de-privacidade.html">Política de Privacidade</a>.</p>
+    </div>
+    <div class="consent-actions">
+      <button type="button" class="button" data-consent="granted">Aceitar</button>
+      <button type="button" class="button secondary inverse" data-consent="denied">Recusar</button>
+      <button type="button" class="button secondary inverse consent-close" data-consent-close>Fechar</button>
+    </div>
+  </div>
+</div>
 <header class="site-header">
   <div class="shell header-inner">
-    <a class="brand" href="index.html" aria-label="Danilo Souza — página inicial">
+    <a class="brand" href="index.html">
       <span class="brand-mark" aria-hidden="true"></span>
       <span class="brand-text"><strong>Danilo Souza</strong><span>Souza Acessibilidade</span></span>
+      <span class="sr-only"> — página inicial</span>
     </a>
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-menu"><span aria-hidden="true">☰</span><span class="sr-only">Abrir menu</span></button>
     <nav id="site-menu" class="site-nav" aria-label="Navegação principal">
       <ul>
         <li><a href="index.html">Início</a></li>
         <li><a href="quem-sou.html">Quem sou</a></li>
-        <li><a href="entre-a-leitura-e-a-permanencia.html">Livro</a></li>
+        <li><a href="entre-a-leitura-e-a-permanencia.html">Livros publicados</a></li>
         <li><a href="accessops-framework.html" aria-current="page">AccessOps Framework</a></li>
+        <li><a href="formacoes.html">Formações personalizadas</a></li>
         <li class="nav-submenu">
           <button class="submenu-toggle" type="button" aria-expanded="false" aria-controls="atuacao-menu">Atuação e publicações <span aria-hidden="true">▾</span></button>
-          <ul id="atuacao-menu" class="submenu" hidden><li><a href="cursos.html">Cursos</a></li><li><a href="ferramentas-e-recursos.html">Ferramentas e recursos</a></li><li><a href="projetos.html">Projetos</a></li><li><a href="publicacoes.html">Publicações</a></li><li><a href="atuacao-voluntaria.html">Atuação voluntária</a></li></ul>
+          <ul id="atuacao-menu" class="submenu" hidden><li><a href="projetos.html">Projetos em destaque</a></li><li><a href="publicacoes.html">Publicações</a></li><li><a href="atuacao-voluntaria.html">Atuação voluntária</a></li><li><a href="cursos.html">Cursos</a></li><li><a href="ferramentas-e-recursos.html">Ferramentas e recursos</a></li></ul>
         </li>
         <li><a href="contato.html">Contato</a></li>
       </ul>
@@ -46,13 +85,13 @@
 </header>
 <main id="conteudo" tabindex="-1">
 <section class="page-hero"><div class="shell"><p class="eyebrow">Metodologia autoral</p><h1>AccessOps Framework</h1><p class="lede">Acessibilidade digital contínua: uma metodologia de gestão de tecnologia da informação para integrar acessibilidade à operação e à governança de produtos e serviços digitais.</p></div></section>
-<section class="content-wrap"><div class="shell longform prose-wide">
-<section class="long-section"><h2>Acessibilidade digital contínua</h2><p>O AccessOps Framework é uma metodologia de gestão de tecnologia da informação voltada à sustentação contínua da acessibilidade digital em produtos e serviços digitais.</p><p>A ideia central é simples: produtos digitais mudam o tempo todo. Sites, aplicativos, portais e plataformas recebem novos conteúdos, componentes, integrações, funcionalidades e atualizações. Se a acessibilidade não acompanhar esse movimento, ela pode se deteriorar mesmo em produtos que já tenham sido avaliados anteriormente.</p><p>Por isso, o AccessOps propõe deslocar a acessibilidade da lógica de validação pontual para uma lógica de operação permanente, integrada à rotina de desenvolvimento, conteúdo, qualidade, governança e melhoria contínua.</p></section>
-<section class="long-section"><h2>O problema que o AccessOps procura enfrentar</h2><p>A acessibilidade digital ainda é frequentemente tratada como uma etapa isolada: uma auditoria, uma validação antes da publicação, uma exigência de conformidade ou uma avaliação realizada em momentos específicos.</p><p>Essas ações são importantes, mas não respondem sozinhas à dinâmica real dos ambientes digitais.</p><p>Uma atualização de código pode alterar o comportamento de um componente. Um novo banner pode ser publicado sem texto alternativo adequado. Uma mudança no CMS pode afetar a estrutura de títulos. Um plugin pode introduzir problemas de teclado. Um novo fluxo pode funcionar visualmente e, ao mesmo tempo, criar barreiras para leitores de tela.</p><div class="callout"><p>A pergunta deixa de ser apenas “Este produto passou em uma avaliação de acessibilidade?” e passa a ser também “Como este produto mantém e monitora sua acessibilidade ao longo do tempo?”</p></div></section>
-<section class="long-section"><h2>Por que AccessOps</h2><p>O nome AccessOps se inspira em práticas como DevOps, SecOps, DataOps e DesignOps.</p><p>A proposta não é reproduzir diretamente esses modelos, mas partir de um princípio semelhante: em ambientes digitais complexos, qualidade não se sustenta por ações isoladas.</p><p>Ela depende de processos contínuos, responsabilidades distribuídas, evidências técnicas, monitoramento, governança e capacidade de resposta.</p><p>No contexto da acessibilidade, isso significa integrar critérios técnicos, avaliação humana, automação, conteúdo, desenvolvimento, operação e gestão em um mesmo ciclo de sustentação.</p></section>
+<div class="content-wrap"><div class="shell longform accessops-content">
+<section class="long-section"><h2>Acessibilidade digital contínua</h2><p class="editorial-initial">O AccessOps Framework é uma metodologia de gestão de tecnologia da informação voltada à sustentação contínua da acessibilidade digital em produtos e serviços digitais.</p><p>A ideia central é simples: produtos digitais mudam o tempo todo. Sites, aplicativos, portais e plataformas recebem novos conteúdos, componentes, integrações, funcionalidades e atualizações. Se a acessibilidade não acompanhar esse movimento, ela pode se deteriorar mesmo em produtos que já tenham sido avaliados anteriormente.</p><p>Por isso, o AccessOps propõe deslocar a acessibilidade da lógica de validação pontual para uma lógica de operação permanente, integrada à rotina de desenvolvimento, conteúdo, qualidade, governança e melhoria contínua.</p></section>
+<section class="long-section"><h2>O problema que o AccessOps procura enfrentar</h2><p class="editorial-initial">A acessibilidade digital ainda é frequentemente tratada como uma etapa isolada: uma auditoria, uma validação antes da publicação, uma exigência de conformidade ou uma avaliação realizada em momentos específicos.</p><p>Essas ações são importantes, mas não respondem sozinhas à dinâmica real dos ambientes digitais.</p><p>Uma atualização de código pode alterar o comportamento de um componente. Um novo banner pode ser publicado sem texto alternativo adequado. Uma mudança no CMS pode afetar a estrutura de títulos. Um plugin pode introduzir problemas de teclado. Um novo fluxo pode funcionar visualmente e, ao mesmo tempo, criar barreiras para leitores de tela.</p><div class="callout"><p>A pergunta deixa de ser apenas “Este produto passou em uma avaliação de acessibilidade?” e passa a ser também “Como este produto mantém e monitora sua acessibilidade ao longo do tempo?”</p></div></section>
+<section class="long-section"><h2>Por que AccessOps</h2><p class="editorial-initial">O nome AccessOps se inspira em práticas como DevOps, SecOps, DataOps e DesignOps.</p><p>A proposta não é reproduzir diretamente esses modelos, mas partir de um princípio semelhante: em ambientes digitais complexos, qualidade não se sustenta por ações isoladas.</p><p>Ela depende de processos contínuos, responsabilidades distribuídas, evidências técnicas, monitoramento, governança e capacidade de resposta.</p><p>No contexto da acessibilidade, isso significa integrar critérios técnicos, avaliação humana, automação, conteúdo, desenvolvimento, operação e gestão em um mesmo ciclo de sustentação.</p></section>
 <section class="long-section"><h2>Fundamentos da abordagem</h2><h3>WCAG e normas técnicas como base</h3><p>As WCAG fornecem uma base técnica estruturante para a avaliação da acessibilidade digital.</p><p>No contexto brasileiro, normas como a ABNT NBR 17225, voltada a conteúdo e aplicações web, e a ABNT NBR 17060, voltada a aplicativos de dispositivos móveis, também ajudam a orientar requisitos e práticas.</p><p>O AccessOps não substitui essas referências. Ele procura organizar como elas entram na rotina de trabalho e de governança ao longo do ciclo de vida de um produto digital.</p><h3>Automação e inteligência artificial como apoio</h3><p>Ferramentas automatizadas podem ampliar escala, rastreabilidade e capacidade de monitoramento.</p><p>Recursos baseados em inteligência artificial também podem apoiar tarefas como classificação, análise preliminar de padrões, geração de evidências e apoio à priorização.</p><p>Mas automação e IA não substituem avaliação humana qualificada, testes com pessoas com deficiência nem responsabilidade técnica.</p><p>O papel dessas tecnologias, dentro do AccessOps, é ampliar capacidade operacional sem apagar a necessidade de interpretação, contexto e experiência real de uso.</p><h3>Responsabilidade distribuída</h3><p>Acessibilidade não depende apenas de quem desenvolve.</p><p>Ela pode ser afetada por decisões de gestão, design, desenvolvimento, conteúdo, QA, contratação, comunicação, segurança da informação, arquitetura, produto e governança de tecnologia.</p><p>Também pode se deteriorar fora do código: em PDFs, imagens, vídeos, tabelas, templates, páginas criadas em CMS, componentes reutilizados e decisões editoriais.</p><p>Por isso, a responsabilidade precisa ser distribuída e incorporada aos processos da organização.</p></section>
 <section class="long-section"><h2>Depreciação da acessibilidade</h2><p>Produtos digitais são ambientes em permanente mudança.</p><p>Quando a acessibilidade não é monitorada e mantida, barreiras podem surgir silenciosamente ao longo do tempo.</p><p>Essa depreciação pode acontecer por meio de atualizações de código, substituição de componentes, alterações em templates, publicação de novos conteúdos, uso de plugins, mudanças de design, novas funcionalidades, alterações em bibliotecas e decisões editoriais ou de comunicação.</p><p>Um produto acessível hoje não permanece necessariamente acessível amanhã. Monitorar acessibilidade significa acompanhar também essa possibilidade de perda gradual de qualidade.</p></section>
-<section class="long-section"><h2>O ciclo operacional do AccessOps</h2><p>O AccessOps organiza a operação contínua de acessibilidade em seis movimentos recorrentes:</p><div class="cycle"><article><span class="n">01</span><h3>Diagnosticar</h3><p>Realizar uma leitura inicial do produto ou serviço digital com diferentes fontes de evidência, incluindo automação, análise técnica, histórico de ocorrências e padrões de risco.</p></article><article><span class="n">02</span><h3>Classificar</h3><p>Organizar páginas, jornadas, componentes e conteúdos por função, criticidade, recorrência e impacto.</p></article><article><span class="n">03</span><h3>Avaliar</h3><p>Realizar análise humana orientada por critérios técnicos, normas aplicáveis e experiência real de uso.</p></article><article><span class="n">04</span><h3>Corrigir</h3><p>Transformar achados em ações concretas, priorizando impacto, risco de exclusão, recorrência e causas sistêmicas.</p></article><article><span class="n">05</span><h3>Monitorar</h3><p>Acompanhar indicadores, alterações, regressões e sinais de depreciação da acessibilidade.</p></article><article><span class="n">06</span><h3>Reavaliar</h3><p>Repetir a análise diante de mudanças relevantes, novos relatos ou variações que indiquem necessidade de investigação.</p></article></div></section>
+<section class="long-section"><h2>O ciclo operacional do AccessOps</h2><p class="editorial-initial">O AccessOps organiza a operação contínua de acessibilidade em seis movimentos recorrentes:</p><div class="cycle"><article><span class="n">01</span><h3>Diagnosticar</h3><p>Realizar uma leitura inicial do produto ou serviço digital com diferentes fontes de evidência, incluindo automação, análise técnica, histórico de ocorrências e padrões de risco.</p></article><article><span class="n">02</span><h3>Classificar</h3><p>Organizar páginas, jornadas, componentes e conteúdos por função, criticidade, recorrência e impacto.</p></article><article><span class="n">03</span><h3>Avaliar</h3><p>Realizar análise humana orientada por critérios técnicos, normas aplicáveis e experiência real de uso.</p></article><article><span class="n">04</span><h3>Corrigir</h3><p>Transformar achados em ações concretas, priorizando impacto, risco de exclusão, recorrência e causas sistêmicas.</p></article><article><span class="n">05</span><h3>Monitorar</h3><p>Acompanhar indicadores, alterações, regressões e sinais de depreciação da acessibilidade.</p></article><article><span class="n">06</span><h3>Reavaliar</h3><p>Repetir a análise diante de mudanças relevantes, novos relatos ou variações que indiquem necessidade de investigação.</p></article></div></section>
 <section class="long-section"><h2>Acessibilidade como parte da operação</h2><p>O AccessOps não pressupõe que toda organização tenha uma equipe exclusiva de acessibilidade. A proposta é integrar acessibilidade às estruturas que já existem.</p><p>Desenvolvimento pode incorporar verificações em sua rotina. QA pode incluir cenários de acessibilidade em testes. Design pode documentar comportamento acessível de componentes. Times de conteúdo podem receber critérios para publicação de imagens, tabelas, documentos e vídeos. Gestores podem acompanhar indicadores. Áreas de governança podem definir responsabilidades e critérios mínimos.</p><p>A acessibilidade deixa, assim, de depender exclusivamente de uma auditoria eventual e passa a fazer parte do funcionamento normal do produto.</p></section>
 <section class="long-section"><h2>Conteúdo e CMS também fazem parte do problema</h2><p>Uma parcela importante das barreiras digitais não surge diretamente no desenvolvimento. Ela pode ser introduzida no momento da publicação de conteúdo.</p><p>Por isso, o AccessOps também considera aspectos como textos alternativos, estrutura de títulos, tabelas, documentos PDF, vídeos, legendas, audiodescrição, links, formulários, componentes inseridos por editores, templates e páginas construídas em CMS.</p><p>Nesse contexto, acessibilidade precisa fazer parte também das regras editoriais, capacitações e ferramentas utilizadas por quem publica conteúdo.</p></section>
 <section class="long-section"><h2>Automação e observabilidade</h2><p>Uma operação contínua exige capacidade de observar o comportamento da acessibilidade ao longo do tempo.</p><p>No AccessOps, isso pode significar acompanhar indicadores, variações, padrões de erro, componentes recorrentes e jornadas críticas.</p><p>Ferramentas automatizadas podem ajudar a identificar mudanças em grande escala, mas os resultados precisam ser interpretados. Uma pontuação isolada não é suficiente para representar a acessibilidade de um produto.</p><p>Indicadores devem funcionar como sinais para investigação, priorização e acompanhamento.</p></section>
@@ -60,20 +99,20 @@
 <section class="long-section"><h2>Maturidade em acessibilidade digital</h2><p>Maturidade não significa simplesmente alcançar um momento em que uma ferramenta não identifica erros.</p><p>Ela aparece na capacidade da organização de prevenir, identificar, corrigir e reduzir barreiras de forma contínua.</p><p>Uma organização mais madura tende a possuir responsabilidades definidas, critérios técnicos conhecidos, processos documentados, monitoramento, capacitação, canais para relato de barreiras, mecanismos de priorização, reavaliação e histórico de decisões e correções.</p><p>Nesse sentido, acessibilidade deixa de ser apenas conformidade e passa a ser capacidade organizacional.</p></section>
 <section class="long-section"><h2>Onde o AccessOps pode ser aplicado</h2><p>A abordagem pode ser adaptada a desenvolvimento de novos produtos digitais, manutenção de sites e aplicativos existentes, portais institucionais, serviços digitais públicos, comércio eletrônico, sistemas internos, plataformas educacionais, CMS, processos de QA, design systems, programas de transformação digital, auditorias internas, capacitação de equipes, governança de tecnologia e melhoria contínua de produtos e serviços.</p><p>O framework não pressupõe uma única ferramenta, arquitetura ou modelo de equipe. A implementação precisa considerar maturidade, contexto, recursos disponíveis e características do produto.</p></section>
 <section class="long-section"><h2>Limites da abordagem</h2><p>O AccessOps não substitui avaliação técnica especializada. Também não garante acessibilidade apenas pela adoção do processo.</p><p>Uma metodologia de governança só produz resultado se houver capacidade real de identificar barreiras, tomar decisões, corrigir problemas e ouvir pessoas com deficiência.</p><p>Da mesma forma, conformidade técnica não deve ser confundida automaticamente com uma boa experiência de uso. Critérios, normas e ferramentas são meios importantes, mas precisam ser combinados com análise contextual e experiência humana.</p></section>
-<section class="long-section"><h2>Origem do framework</h2><p>O AccessOps surgiu da aproximação entre diferentes frentes da minha atuação: acessibilidade digital, avaliação técnica, monitoramento automatizado, gestão de tecnologia, comunicação inclusiva e governança de produtos e serviços digitais.</p><p>Parte das reflexões que levaram à sua formulação ganhou forma durante meus estudos em Gestão Estratégica de Tecnologia da Informação, quando questões relacionadas a governança, operação, processos e melhoria contínua começaram a se cruzar com problemas que eu já encontrava na prática profissional.</p><p>A metodologia foi sistematizada como uma forma de organizar essas questões em um ciclo operacional aplicável a diferentes contextos.</p></section>
+<section class="long-section"><h2>Origem do framework</h2><p class="editorial-initial">O AccessOps surgiu da aproximação entre diferentes frentes da minha atuação: acessibilidade digital, avaliação técnica, monitoramento automatizado, gestão de tecnologia, comunicação inclusiva e governança de produtos e serviços digitais.</p><p>Parte das reflexões que levaram à sua formulação ganhou forma durante meus estudos em Gestão Estratégica de Tecnologia da Informação, quando questões relacionadas a governança, operação, processos e melhoria contínua começaram a se cruzar com problemas que eu já encontrava na prática profissional.</p><p>A metodologia foi sistematizada como uma forma de organizar essas questões em um ciclo operacional aplicável a diferentes contextos.</p></section>
 <section class="long-section"><h2>Autoria e versão</h2><p><strong>Autor:</strong> Danilo Silva de Souza<br><strong>Publicação inicial:</strong> 1º de junho de 2026</p><p>O AccessOps Framework é uma metodologia autoral em desenvolvimento contínuo. Novas versões podem incorporar aprendizados decorrentes de pesquisa, aplicação prática, evolução das normas técnicas e mudanças nas tecnologias utilizadas para desenvolvimento e avaliação de produtos digitais.</p></section>
 <section class="long-section"><h2>Licença de uso</h2><p>O conteúdo do AccessOps Framework é disponibilizado sob a licença <a href="https://creativecommons.org/licenses/by-nc/4.0/deed.pt-br" target="_blank" rel="noopener noreferrer">Creative Commons Atribuição-NãoComercial 4.0 Internacional — CC BY-NC 4.0<span class="sr-only"> (abre em nova aba)</span></a>.</p><p>O conteúdo pode ser compartilhado e adaptado para fins não comerciais, desde que a autoria seja atribuída a Danilo Souza e a origem seja indicada.</p><p>Usos comerciais, incluindo cursos pagos, consultorias, certificações, produtos, serviços ou materiais corporativos derivados do framework, dependem de autorização prévia do autor.</p></section>
-</div></section></main>
+</div></div></main>
 <footer class="site-footer">
   <div class="footer-grid shell">
     <div>
       <p class="footer-brand">Danilo Souza</p>
       <p>Acessibilidade digital, comunicação inclusiva, educação e tecnologias assistivas.</p>
-      <div class="footer-social" aria-label="Perfis e canais externos">
+      <nav class="footer-social" aria-label="Perfis e canais externos">
         <a href="https://www.linkedin.com/in/danilo-s-souza/" target="_blank" rel="noopener noreferrer">LinkedIn<span class="sr-only"> (abre em nova aba)</span></a>
         <a href="http://lattes.cnpq.br/0973728129775438" target="_blank" rel="noopener noreferrer">Lattes<span class="sr-only"> (abre em nova aba)</span></a>
         <a href="https://www.youtube.com/playlist?list=PL_rMi_LH7fsJri7m0arTn__mu0YzsAhyv" target="_blank" rel="noopener noreferrer">YouTube<span class="sr-only"> (abre em nova aba)</span></a>
-      </div>
+      </nav>
     </div>
     <nav aria-label="Informações do site" class="footer-links">
       <a href="mapa-do-site.html">Mapa do site</a>
@@ -86,23 +125,7 @@
     <a class="github-hosting" href="https://github.com/DxDad/souzaacessibilidade" target="_blank" rel="noopener noreferrer"><span class="github-mark" aria-hidden="true"></span>Este site está hospedado via GitHub Pages.<span class="sr-only"> Repositório do site, abre em nova aba.</span></a>
   </div>
 </footer>
-<div class="consent" id="analytics-consent" hidden role="dialog" aria-modal="true" aria-labelledby="consent-title" aria-describedby="consent-text">
-  <div class="consent-inner">
-    <div>
-      <p id="consent-title"><strong>Privacidade e estatísticas</strong></p>
-      <p id="consent-text">O site usa medição sem cookies por padrão. Com sua autorização, o Google Analytics pode usar armazenamento para produzir métricas mais completas.</p>
-    </div>
-    <div class="consent-actions">
-      <button type="button" class="button" data-consent="granted">Aceitar</button>
-      <button type="button" class="button secondary inverse" data-consent="denied">Recusar</button>
-      <a class="consent-policy" href="politica-de-privacidade.html">Política de privacidade</a>
-      <button type="button" class="consent-close" data-consent-close aria-label="Fechar e manter a medição sem cookies">×</button>
-    </div>
-  </div>
-</div>
 <script src="assets/js/main.js" defer></script>
-<div vw class="enabled"><div vw-access-button class="active"></div><div vw-plugin-wrapper><div class="vw-plugin-top-wrapper"></div></div></div>
-<script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
-<script>if(window.VLibras){new window.VLibras.Widget('https://vlibras.gov.br/app');}</script>
+<script src="https://vlibras.gov.br/app/vlibras-plugin.js" defer></script>
 </body>
 </html>
