@@ -1333,25 +1333,28 @@ main {
   min-height: 48px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
   gap: 1rem;
   padding-block: .3rem
 }
 
 .skip-link {
-  position: static;
-  z-index: auto;
+  position: fixed;
+  left: 1rem;
+  top: 1rem;
+  z-index: 10000;
   display: inline-flex;
   align-items: center;
-  background: transparent;
-  color: var(--ink);
-  padding: .38rem 0;
-  transform: none;
-  border: 0;
+  background: #fff;
+  color: #000;
+  padding: .65rem 1rem;
+  transform: translateY(-180%);
+  border: 2px solid #000;
   font-weight: 700
 }
 
-.skip-link:focus {
+.skip-link:focus,
+.skip-link:focus-visible {
   transform: none
 }
 
@@ -1623,7 +1626,8 @@ main {
 
 @media(max-width:700px) {
   .utility-inner {
-    align-items: flex-start;
+    align-items: center;
+    justify-content: flex-end;
     gap: .55rem
   }
 
@@ -1661,8 +1665,29 @@ main {
     gap: 0
   }
 
+  .resource-meta>div {
+    grid-template-columns: max-content minmax(0, 1fr);
+    column-gap: .85rem
+  }
+
+  .resource-meta dt {
+    white-space: nowrap
+  }
+
   .resource-meta dd {
+    min-width: 0;
+    overflow-wrap: anywhere;
     margin-bottom: .5rem
+  }
+
+  .button-row {
+    align-items: stretch
+  }
+
+  .button-row .button {
+    width: 100%;
+    max-width: 100%;
+    text-align: center
   }
 
   .consent-inner {
@@ -1676,12 +1701,13 @@ main {
 
 @media(max-width:470px) {
   .utility-inner {
-    display: grid;
-    grid-template-columns: 1fr
+    display: flex;
+    justify-content: flex-end
   }
 
   .display-controls {
-    justify-content: flex-start
+    justify-content: flex-end;
+    width: 100%
   }
 
   .brand-text span {
