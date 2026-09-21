@@ -7,6 +7,13 @@
   const themeMeta = document.getElementById('theme-color-meta');
   const textSizes = [14, 16, 18, 20, 22];
 
+  const themeStatus = document.createElement('span');
+  themeStatus.className = 'sr-only';
+  themeStatus.setAttribute('role', 'status');
+  themeStatus.setAttribute('aria-live', 'polite');
+  themeStatus.setAttribute('aria-atomic', 'true');
+  themeButton?.insertAdjacentElement('afterend', themeStatus);
+
   const storage = {
     get(key) {
       try { return localStorage.getItem(key); } catch { return null; }
@@ -16,40 +23,88 @@
     }
   };
 
-  function applyTheme(theme, persist = true) {
+  function applyTheme(theme, persist = true, announce = false) {
     const normalized = theme === 'light' ? 'light' : 'dark';
     root.dataset.theme = normalized;
-    if (themeButton) themeButton.textContent = normalized === 'dark' ? 'Modo claro' : 'Modo escuro';
-    if (themeMeta) themeMeta.setAttribute('content', normalized === 'dark' ? '#171b18' : '#f4efe5');
+
+    if (themeButton) {
+      themeButton.textContent = normalized === 'dark' ? 'Modo claro' : 'Modo escuro';
+    }
+
+    if (themeMeta) {
+      themeMeta.setAttribute('content', normalized === 'dark' ? '#171b18' : '#f4efe5');
+    }
+
     if (persist) storage.set('souza_theme', normalized);
+
+    if (announce) {
+      themeStatus.textContent = normalized === 'dark' ? 'Modo escuro ativado.' : 'Modo claro ativado.';
+    }
+  }
+
+  function announceTextSize(message) {
+    if (!textSizeStatus) return;
+    textSizeStatus.textContent = '';
+    requestAnimationFrame(() => {
+      textSizeStatus.textContent = message;
+    });
   }
 
   function applyTextSize(size, announce = false) {
     const normalized = textSizes.includes(size) ? size : 16;
+    const atMinimum = normalized === textSizes[0];
+    const atMaximum = normalized === textSizes[textSizes.length - 1];
+
     root.style.setProperty('--text-size', `${normalized}px`);
     root.dataset.textSize = String(normalized);
     storage.set('souza_text_size', String(normalized));
-    if (decreaseButton) decreaseButton.disabled = normalized === textSizes[0];
-    if (increaseButton) increaseButton.disabled = normalized === textSizes[textSizes.length - 1];
-    if (announce && textSizeStatus) textSizeStatus.textContent = `Tamanho do texto: ${normalized} pixels.`;
+
+    if (decreaseButton) {
+      decreaseButton.removeAttribute('disabled');
+      decreaseButton.setAttribute('aria-disabled', String(atMinimum));
+      decreaseButton.setAttribute('aria-label', atMinimum ? 'Fonte mínima' : 'Diminuir fonte');
+    }
+
+    if (increaseButton) {
+      increaseButton.removeAttribute('disabled');
+      increaseButton.setAttribute('aria-disabled', String(atMaximum));
+      increaseButton.setAttribute('aria-label', atMaximum ? 'Fonte máxima' : 'Aumentar fonte');
+    }
+
+    if (announce) {
+      if (atMinimum) announceTextSize('Fonte mínima.');
+      else if (atMaximum) announceTextSize('Fonte máxima.');
+      else announceTextSize(`Tamanho da fonte: ${normalized} pixels.`);
+    }
   }
 
   applyTheme(root.dataset.theme, false);
   applyTextSize(Number(root.dataset.textSize || storage.get('souza_text_size') || 16));
 
   themeButton?.addEventListener('click', () => {
-    applyTheme(root.dataset.theme === 'dark' ? 'light' : 'dark');
+    const nextTheme = root.dataset.theme === 'dark' ? 'light' : 'dark';
+    applyTheme(nextTheme, true, true);
   });
 
   decreaseButton?.addEventListener('click', () => {
-    const current = Number(root.dataset.textSize || 18);
-    const index = Math.max(0, textSizes.indexOf(current) - 1);
+    const current = Number(root.dataset.textSize || 16);
+    const currentIndex = textSizes.indexOf(current);
+    if (currentIndex <= 0) {
+      announceTextSize('Fonte mínima.');
+      return;
+    }
+    const index = currentIndex - 1;
     applyTextSize(textSizes[index], true);
   });
 
   increaseButton?.addEventListener('click', () => {
-    const current = Number(root.dataset.textSize || 18);
-    const index = Math.min(textSizes.length - 1, textSizes.indexOf(current) + 1);
+    const current = Number(root.dataset.textSize || 16);
+    const currentIndex = textSizes.indexOf(current);
+    if (currentIndex >= textSizes.length - 1) {
+      announceTextSize('Fonte máxima.');
+      return;
+    }
+    const index = currentIndex + 1;
     applyTextSize(textSizes[index], true);
   });
 
@@ -91,6 +146,16 @@
     const willOpen = submenuToggle.getAttribute('aria-expanded') !== 'true';
     submenuToggle.setAttribute('aria-expanded', String(willOpen));
     submenu.hidden = !willOpen;
+  });
+
+  const submenuLinks = submenu ? Array.from(submenu.querySelectorAll('a')) : [];
+  const lastSubmenuLink = submenuLinks[submenuLinks.length - 1];
+
+  lastSubmenuLink?.addEventListener('keydown', (event) => {
+    if (event.key === 'Tab' && !event.shiftKey && submenuToggle?.getAttribute('aria-expanded') === 'true') {
+      event.preventDefault();
+      submenuToggle.focus();
+    }
   });
 
   nav?.querySelectorAll('a').forEach((link) => {

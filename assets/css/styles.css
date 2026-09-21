@@ -514,7 +514,7 @@ h3 {
   padding: .72rem 1.05rem;
   border: 2px solid var(--green-strong);
   background: var(--green-strong);
-  color: var(--bg);
+  color: var(--button-text);
   text-decoration: none;
   font-weight: 750;
   border-radius: 3px;
@@ -1037,7 +1037,7 @@ h3 {
 
 .consent-close {
   background: transparent;
-  border: 1px solid #fff;
+  border: 2px solid #fff;
   color: #fff;
   font-size: 1.35rem;
   line-height: 1;
@@ -1282,6 +1282,7 @@ h3 {
   --green: #a8c1ad;
   --green-strong: #c5d6c8;
   --green-soft: #2e3b32;
+  --button-text: #000;
   --bronze: #d5ad75;
   --line: #424a43;
   --focus: #78b8ff;
@@ -1299,6 +1300,7 @@ h3 {
   --green: #3f5548;
   --green-strong: #2e4438;
   --green-soft: #dfe6df;
+  --button-text: #fff;
   --bronze: #825b2a;
   --line: #cec5b7;
   --focus: #005fcc;
@@ -1381,6 +1383,15 @@ main {
 .utility-button:disabled {
   opacity: .48;
   cursor: not-allowed
+}
+
+.utility-button[aria-disabled="true"] {
+  opacity: 1;
+  cursor: default
+}
+
+.utility-button[aria-disabled="true"]:hover {
+  background: var(--surface)
 }
 
 .font-button {
@@ -1669,4 +1680,8 @@ main {
   .brand-text span {
     display: none
   }
+}
+
+.consent .consent-close {
+  border: 2px solid #fff;
 }
