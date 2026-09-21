@@ -113,6 +113,41 @@
   const submenuToggle = document.querySelector('.submenu-toggle');
   const submenu = document.getElementById('atuacao-menu');
 
+  function isMainMenuOpen() {
+    return Boolean(
+      navToggle &&
+      nav &&
+      navToggle.getAttribute('aria-expanded') === 'true' &&
+      nav.classList.contains('open')
+    );
+  }
+
+  function focusableInMainMenu() {
+    if (!navToggle || !nav) return [];
+    const elements = [
+      navToggle,
+      ...nav.querySelectorAll('a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])')
+    ];
+    return elements.filter((element) =>
+      !element.hidden &&
+      !element.closest('[hidden]') &&
+      element.getClientRects().length > 0
+    );
+  }
+
+  function keepFocusedItemVisible(element) {
+    if (!nav || !(element instanceof HTMLElement) || !nav.contains(element)) return;
+    const navRect = nav.getBoundingClientRect();
+    const elementRect = element.getBoundingClientRect();
+    const margin = 12;
+
+    if (elementRect.top < navRect.top + margin) {
+      nav.scrollBy({ top: elementRect.top - navRect.top - margin, behavior: 'auto' });
+    } else if (elementRect.bottom > navRect.bottom - margin) {
+      nav.scrollBy({ top: elementRect.bottom - navRect.bottom + margin, behavior: 'auto' });
+    }
+  }
+
   function closeSubmenu(returnFocus = false) {
     if (!submenuToggle || !submenu) return;
     submenuToggle.setAttribute('aria-expanded', 'false');
@@ -124,6 +159,8 @@
     if (!navToggle || !nav) return;
     navToggle.setAttribute('aria-expanded', 'false');
     nav.classList.remove('open');
+    document.body.classList.remove('nav-open');
+    nav.scrollTop = 0;
     const label = navToggle.querySelector('.sr-only');
     if (label) label.textContent = 'Abrir menu';
     closeSubmenu(false);
@@ -136,9 +173,11 @@
     const willOpen = navToggle.getAttribute('aria-expanded') !== 'true';
     navToggle.setAttribute('aria-expanded', String(willOpen));
     nav.classList.toggle('open', willOpen);
+    document.body.classList.toggle('nav-open', willOpen);
     const label = navToggle.querySelector('.sr-only');
     if (label) label.textContent = willOpen ? 'Fechar menu' : 'Abrir menu';
-    if (!willOpen) closeSubmenu(false);
+    if (willOpen) nav.scrollTop = 0;
+    else closeSubmenu(false);
   });
 
   submenuToggle?.addEventListener('click', () => {
@@ -158,6 +197,10 @@
     }
   });
 
+  nav?.addEventListener('focusin', (event) => {
+    requestAnimationFrame(() => keepFocusedItemVisible(event.target));
+  });
+
   nav?.querySelectorAll('a').forEach((link) => {
     link.addEventListener('click', () => {
       if (navToggle?.getAttribute('aria-expanded') === 'true') closeMainMenu();
@@ -169,14 +212,32 @@
   });
 
   document.addEventListener('keydown', (event) => {
-    if (event.key !== 'Escape') return;
-    if (submenuToggle?.getAttribute('aria-expanded') === 'true') {
-      event.preventDefault();
-      closeSubmenu(true);
-    } else if (navToggle?.getAttribute('aria-expanded') === 'true') {
-      event.preventDefault();
-      closeMainMenu();
-      navToggle.focus();
+    if (event.key === 'Tab' && isMainMenuOpen() && !event.defaultPrevented) {
+      const items = focusableInMainMenu();
+      if (!items.length) return;
+      const first = items[0];
+      const last = items[items.length - 1];
+      const active = document.activeElement;
+
+      if (event.shiftKey && (active === first || !items.includes(active))) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && (active === last || !items.includes(active))) {
+        event.preventDefault();
+        first.focus();
+      }
+      return;
+    }
+
+    if (event.key === 'Escape') {
+      if (submenuToggle?.getAttribute('aria-expanded') === 'true') {
+        event.preventDefault();
+        closeSubmenu(true);
+      } else if (isMainMenuOpen()) {
+        event.preventDefault();
+        closeMainMenu();
+        navToggle.focus();
+      }
     }
   });
 
