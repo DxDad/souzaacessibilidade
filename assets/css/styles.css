@@ -1596,6 +1596,10 @@ main {
     left: 0;
     right: 0;
     top: 86px;
+    max-height: calc(100dvh - 86px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scroll-padding-block: .75rem;
     background: var(--surface);
     border-bottom: 1px solid var(--line);
     padding: .5rem 1.5rem 1rem
@@ -1611,7 +1615,12 @@ main {
 
   .site-nav a,
   .submenu-toggle {
-    padding: .8rem .5rem
+    padding: .8rem .5rem;
+    scroll-margin-block: .75rem
+  }
+
+  body.nav-open {
+    overflow: hidden
   }
 
   .submenu {
@@ -1644,7 +1653,8 @@ main {
   }
 
   .site-nav {
-    top: 76px
+    top: 76px;
+    max-height: calc(100dvh - 76px)
   }
 
   .brand-mark {
