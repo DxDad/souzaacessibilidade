@@ -159,6 +159,7 @@
     if (!navToggle || !nav) return;
     navToggle.setAttribute('aria-expanded', 'false');
     nav.classList.remove('open');
+    document.documentElement.classList.remove('nav-open');
     document.body.classList.remove('nav-open');
     nav.scrollTop = 0;
     const label = navToggle.querySelector('.sr-only');
@@ -173,6 +174,7 @@
     const willOpen = navToggle.getAttribute('aria-expanded') !== 'true';
     navToggle.setAttribute('aria-expanded', String(willOpen));
     nav.classList.toggle('open', willOpen);
+    document.documentElement.classList.toggle('nav-open', willOpen);
     document.body.classList.toggle('nav-open', willOpen);
     const label = navToggle.querySelector('.sr-only');
     if (label) label.textContent = willOpen ? 'Fechar menu' : 'Abrir menu';
@@ -247,22 +249,25 @@
 
   function focusFragmentTarget(fragment, updateHistory = false) {
     const id = fragment.replace(/^#/, '');
-    if (!id) return;
+    if (!id) return false;
     const target = document.getElementById(id);
-    if (!target) return;
-    if (!target.hasAttribute('tabindex')) target.setAttribute('tabindex', '-1');
-    target.focus({ preventScroll: true });
+    if (!target) return false;
+    const focusTarget = id === 'conteudo'
+      ? target
+      : target.matches('h1, h2, h3, h4, h5, h6')
+        ? target
+        : target.querySelector('h1, h2, h3, h4, h5, h6') || target;
+    if (!focusTarget.hasAttribute('tabindex')) focusTarget.setAttribute('tabindex', '-1');
+    focusTarget.focus({ preventScroll: true });
     target.scrollIntoView({ block: 'start' });
     if (updateHistory && window.location.hash !== `#${id}`) history.pushState(null, '', `#${id}`);
+    return true;
   }
 
   document.querySelector('.skip-link')?.addEventListener('click', (event) => {
     event.preventDefault();
     focusFragmentTarget('#conteudo', true);
   });
-
-  if (window.location.hash) requestAnimationFrame(() => focusFragmentTarget(window.location.hash));
-  window.addEventListener('hashchange', () => focusFragmentTarget(window.location.hash));
 
   const consentKey = 'souza_analytics_consent';
   const measurementId = 'G-F6B87YSFC9';
@@ -348,12 +353,25 @@
     document.body.style.removeProperty('--consent-height');
     consentResizeObserver?.disconnect();
     consentResizeObserver = null;
+    if (window.location.hash) {
+      requestAnimationFrame(() => focusFragmentTarget(window.location.hash));
+      return;
+    }
     if (returnFocus && lastFocus instanceof HTMLElement && lastFocus !== document.body) lastFocus.focus();
     else document.getElementById('conteudo')?.focus();
   }
 
   if (!storedConsent && consentBox) showConsent();
   updateStatus();
+
+  function focusCurrentFragment() {
+    if (!window.location.hash || (consentBox && !consentBox.hidden)) return;
+    requestAnimationFrame(() => focusFragmentTarget(window.location.hash));
+  }
+
+  if (document.readyState === 'complete') focusCurrentFragment();
+  else window.addEventListener('load', focusCurrentFragment, { once: true });
+  window.addEventListener('hashchange', focusCurrentFragment);
 
   document.querySelectorAll('[data-consent]').forEach((button) => {
     button.addEventListener('click', () => {
@@ -400,6 +418,22 @@
       window.gtag('event', 'book_sample_open');
     }
   });
+
+  if (!document.querySelector('.whatsapp-float')) {
+    const whatsappLink = document.createElement('a');
+    whatsappLink.className = 'whatsapp-float';
+    whatsappLink.href = 'https://wa.me/5511988588232';
+    whatsappLink.target = '_blank';
+    whatsappLink.rel = 'noopener noreferrer';
+    whatsappLink.title = 'Iniciar conversa pelo WhatsApp';
+    whatsappLink.dataset.trackEvent = 'whatsapp_floating_click';
+    whatsappLink.innerHTML = `
+      <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.009-.371-.011-.57-.011-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.876 1.213 3.074.149.198 2.096 3.2 5.076 4.487.709.306 1.262.489 1.694.626.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.981.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.897 6.994c-.003 5.45-4.437 9.884-9.884 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"></path>
+      </svg>
+      <span class="sr-only">Iniciar conversa pelo WhatsApp (abre em nova aba)</span>`;
+    document.body.appendChild(whatsappLink);
+  }
 
   document.querySelectorAll('[data-track-event]').forEach((element) => {
     element.addEventListener('click', () => window.gtag('event', element.dataset.trackEvent));
