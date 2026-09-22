@@ -744,11 +744,11 @@ h3 {
   padding: .18rem 0
 }
 
-.resource-meta dt {
+.resource-meta .resource-label {
   font-weight: 750
 }
 
-.resource-meta dd {
+.resource-meta .resource-value {
   margin: 0
 }
 
@@ -1522,11 +1522,11 @@ main {
   padding: 0
 }
 
-.resource-meta dt {
+.resource-meta .resource-label {
   padding: .12rem 0
 }
 
-.resource-meta dd {
+.resource-meta .resource-value {
   padding: .12rem 0
 }
 
@@ -1585,6 +1585,48 @@ main {
   outline-offset: 6px
 }
 
+main [tabindex="-1"]:focus {
+  outline: 3px solid var(--focus);
+  outline-offset: 6px
+}
+
+.whatsapp-float {
+  position: fixed;
+  right: 1.25rem;
+  bottom: calc(var(--consent-height, 0px) + 1.25rem);
+  z-index: 95;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 54px;
+  height: 54px;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  background: #128c3e;
+  color: #fff;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, .28);
+  font-size: 1.6rem;
+  line-height: 1;
+  text-decoration: none
+}
+
+.whatsapp-float:hover {
+  background: #0d7131;
+  color: #fff;
+  text-decoration: none
+}
+
+.whatsapp-float:focus-visible {
+  outline: 4px solid var(--focus);
+  outline-offset: 4px
+}
+
+.whatsapp-float svg {
+  width: 30px;
+  height: 30px;
+  fill: currentColor
+}
+
 @media(max-width:1240px) {
   .nav-toggle {
     display: block
@@ -1596,6 +1638,7 @@ main {
     left: 0;
     right: 0;
     top: 86px;
+    height: calc(100dvh - 86px);
     max-height: calc(100dvh - 86px);
     overflow-y: auto;
     overscroll-behavior: contain;
@@ -1606,7 +1649,9 @@ main {
   }
 
   .site-nav.open {
-    display: block
+    display: block;
+    touch-action: pan-y;
+    -webkit-overflow-scrolling: touch
   }
 
   .site-nav>ul {
@@ -1619,8 +1664,10 @@ main {
     scroll-margin-block: .75rem
   }
 
+  html.nav-open,
   body.nav-open {
-    overflow: hidden
+    overflow: hidden;
+    overscroll-behavior: none
   }
 
   .submenu {
@@ -1654,6 +1701,7 @@ main {
 
   .site-nav {
     top: 76px;
+    height: calc(100dvh - 76px);
     max-height: calc(100dvh - 76px)
   }
 
@@ -1680,11 +1728,11 @@ main {
     column-gap: .85rem
   }
 
-  .resource-meta dt {
+  .resource-meta .resource-label {
     white-space: nowrap
   }
 
-  .resource-meta dd {
+  .resource-meta .resource-value {
     min-width: 0;
     overflow-wrap: anywhere;
     margin-bottom: .5rem
