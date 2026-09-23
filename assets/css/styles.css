@@ -1791,6 +1791,25 @@ main [tabindex="-1"]:focus {
   }
 }
 
+@media (min-width: 701px) {
+  .utility-inner {
+    justify-content: space-between;
+  }
+
+  .skip-link {
+    position: static;
+    left: auto;
+    top: auto;
+    z-index: auto;
+    margin-right: auto;
+    padding: .38rem 0;
+    transform: none;
+    border: 0;
+    background: transparent;
+    color: var(--ink);
+  }
+}
+
 .consent .consent-close {
   border: 2px solid #fff;
 }
