@@ -5,6 +5,7 @@
   const increaseButton = document.querySelector('[data-font-increase]');
   const textSizeStatus = document.getElementById('text-size-status');
   const themeMeta = document.getElementById('theme-color-meta');
+  const skipLink = document.querySelector('.skip-link');
   const textSizes = [14, 16, 18, 20, 22];
 
   const themeStatus = document.createElement('span');
@@ -12,7 +13,7 @@
   themeStatus.setAttribute('role', 'status');
   themeStatus.setAttribute('aria-live', 'polite');
   themeStatus.setAttribute('aria-atomic', 'true');
-  themeButton?.insertAdjacentElement('afterend', themeStatus);
+  document.body.append(themeStatus);
 
   const storage = {
     get(key) {
@@ -28,7 +29,10 @@
     root.dataset.theme = normalized;
 
     if (themeButton) {
-      themeButton.textContent = normalized === 'dark' ? 'Modo claro' : 'Modo escuro';
+      const buttonLabel = normalized === 'dark' ? 'Modo claro' : 'Modo escuro';
+      if (themeButton.textContent.trim() !== buttonLabel) {
+        themeButton.textContent = buttonLabel;
+      }
     }
 
     if (themeMeta) {
@@ -264,7 +268,7 @@
     return true;
   }
 
-  document.querySelector('.skip-link')?.addEventListener('click', (event) => {
+  skipLink?.addEventListener('click', (event) => {
     event.preventDefault();
     focusFragmentTarget('#conteudo', true);
   });
@@ -358,7 +362,7 @@
       return;
     }
     if (returnFocus && lastFocus instanceof HTMLElement && lastFocus !== document.body) lastFocus.focus();
-    else document.getElementById('conteudo')?.focus();
+    else skipLink?.focus();
   }
 
   if (!storedConsent && consentBox) showConsent();
