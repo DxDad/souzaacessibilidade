@@ -116,6 +116,30 @@
   const nav = document.getElementById('site-menu');
   const submenuToggle = document.querySelector('.submenu-toggle');
   const submenu = document.getElementById('atuacao-menu');
+  let pageScrollPosition = 0;
+
+  function lockPageScroll() {
+    pageScrollPosition = window.scrollY;
+    document.body.style.top = `-${pageScrollPosition}px`;
+    document.documentElement.classList.add('nav-open');
+    document.body.classList.add('nav-open');
+  }
+
+  function unlockPageScroll() {
+    const wasLocked = document.body.classList.contains('nav-open');
+
+    document.documentElement.classList.remove('nav-open');
+    document.body.classList.remove('nav-open');
+    document.body.style.removeProperty('top');
+
+    if (wasLocked) {
+      window.scrollTo({
+        top: pageScrollPosition,
+        left: 0,
+        behavior: 'auto'
+      });
+    }
+  }
 
   function isMainMenuOpen() {
     return Boolean(
@@ -161,13 +185,18 @@
 
   function closeMainMenu() {
     if (!navToggle || !nav) return;
+
     navToggle.setAttribute('aria-expanded', 'false');
     nav.classList.remove('open');
-    document.documentElement.classList.remove('nav-open');
-    document.body.classList.remove('nav-open');
+    unlockPageScroll();
     nav.scrollTop = 0;
+
     const label = navToggle.querySelector('.sr-only');
-    if (label) label.textContent = 'Abrir menu';
+
+    if (label) {
+      label.textContent = 'Abrir menu';
+    }
+
     closeSubmenu(false);
   }
 
@@ -175,15 +204,32 @@
 
   navToggle?.addEventListener('click', () => {
     if (!nav) return;
-    const willOpen = navToggle.getAttribute('aria-expanded') !== 'true';
-    navToggle.setAttribute('aria-expanded', String(willOpen));
+
+    const willOpen =
+      navToggle.getAttribute('aria-expanded') !== 'true';
+
+    navToggle.setAttribute(
+      'aria-expanded',
+      String(willOpen)
+    );
+
     nav.classList.toggle('open', willOpen);
-    document.documentElement.classList.toggle('nav-open', willOpen);
-    document.body.classList.toggle('nav-open', willOpen);
+
     const label = navToggle.querySelector('.sr-only');
-    if (label) label.textContent = willOpen ? 'Fechar menu' : 'Abrir menu';
-    if (willOpen) nav.scrollTop = 0;
-    else closeSubmenu(false);
+
+    if (label) {
+      label.textContent = willOpen
+        ? 'Fechar menu'
+        : 'Abrir menu';
+    }
+
+    if (willOpen) {
+      lockPageScroll();
+      nav.scrollTop = 0;
+    } else {
+      unlockPageScroll();
+      closeSubmenu(false);
+    }
   });
 
   submenuToggle?.addEventListener('click', () => {

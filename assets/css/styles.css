@@ -1662,12 +1662,25 @@ main [tabindex="-1"]:focus {
   .submenu-toggle {
     padding: .8rem .5rem;
     scroll-margin-block: .75rem
-  }
-
-  html.nav-open,
-  body.nav-open {
+  html.nav-open {
     overflow: hidden;
     overscroll-behavior: none
+  }
+
+  body.nav-open {
+    position: fixed;
+    inset-inline: 0;
+    width: 100%;
+    overflow: hidden;
+    overscroll-behavior: none
+  }
+
+  body.nav-open .site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%
   }
 
   .submenu {
